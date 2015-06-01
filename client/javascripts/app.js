@@ -1,31 +1,21 @@
-var evntHandler = function() {
+var main = function() {
+    var messages = ["If", "a", "six", "turned", "out", "to", "be", "nine"];
 
-    var prefixURL = "https://api.flickr.com/services/feeds/photos_public.gne?tags=";
-    var suffixURL = "&format=json&jsoncallback=?";
-    var flickrTag = $("input").val();
-    var requestURL = prefixURL + flickrTag + suffixURL;
+    var displayMessage = function(messageIndex) {
 
-    //clear old photos
-    $(".photos").html("");
+        var $message = $("<p>").text(messages[messageIndex]).hide();
 
-    var displayImg = function(index) {
+        $(".message").empty();
 
-        $.getJSON(requestURL, function(flickrResponse) {
-            var photoArr = flickrResponse.items;
-            
-            var $img = $("<img>").hide();
-            $img.attr('src', photoArr[index].media.m).hide();
-          	$(".photos").empty();
-            $("main .photos").append($img);
-            $img.fadeIn();
+        $(".message").append($message);
 
-            setTimeout(function() {
-                index = (index + 1) % 20;
-                displayImg(index);
-            }, 1000);
-        });
+        $message.fadeIn();
+
+        setTimeout(function() {
+            messageIndex = (messageIndex + 1) % messages.length;
+            displayMessage(messageIndex);
+        }, 1000);
     };
-    displayImg(0);
+  displayMessage(0)
 };
-
-$("button").on("click", evntHandler);
+$(document).ready(main);
