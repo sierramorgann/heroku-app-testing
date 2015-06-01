@@ -1,6 +1,6 @@
 var evntHandler = function() {
 
-    var prefixURL = "http://api.flickr.com/services/feeds/photos_public.gne?tags=";
+    var prefixURL = "https://api.flickr.com/services/feeds/photos_public.gne?tags=";
     var suffixURL = "&format=json&jsoncallback=?";
     var flickrTag = $("input").val();
     var requestURL = prefixURL + flickrTag + suffixURL;
